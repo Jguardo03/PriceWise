@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.pricewisev2.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.pricewisev2.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_dairyAndEggFragment"
+            app:destination="@id/dairyAndEggFragment" />
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.example.pricewisev2.ShoppingListFragment"
+        android:label="fragment_shopping_list"
+        tools:layout="@layout/fragment_shopping_list" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.pricewisev2.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.pricewisev2.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.pricewisev2.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dairyAndEggFragment"
+        android:name="com.example.pricewisev2.DairyAndEggFragment"
+        android:label="fragment_dairy_and_egg"
+        tools:layout="@layout/fragment_dairy_and_egg">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fruitAndVeggiesFragment"
+        android:name="com.example.pricewisev2.FruitAndVeggiesFragment"
+        android:label="fragment_fruit_and_veggies"
+        tools:layout="@layout/fragment_fruit_and_veggies">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/drinksFragment"
+        android:name="com.example.pricewisev2.DrinksFragment"
+        android:label="fragment_drinks"
+        tools:layout="@layout/fragment_drinks">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/bakeryAndBreadFragment"
+        android:name="com.example.pricewisev2.BakeryAndBreadFragment"
+        android:label="fragment_bakery_and_bread"
+        tools:layout="@layout/fragment_bakery_and_bread">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/frozenFoodFragment"
+        android:name="com.example.pricewisev2.FrozenFoodFragment"
+        android:label="fragment_frozen_food"
+        tools:layout="@layout/fragment_frozen_food">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/pantryFragment"
+        android:name="com.example.pricewisev2.PantryFragment"
+        android:label="fragment_pantry"
+        tools:layout="@layout/fragment_pantry">
+        <argument
+            android:name="addressArg"
+            app:argType="string"/>
+    </fragment>
+</navigation>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "613663455658",
+    "project_id": "pricewise-a2f1c",
+    "storage_bucket": "pricewise-a2f1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613663455658:android:408d577aa4691cdf8a53d3",
+        "android_client_info": {
+          "package_name": "com.example.pricewisev2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYsREgIfzaXQQ05pKowHsTVSPtl7Ba80U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
