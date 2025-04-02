@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pricewisev2.R;
@@ -42,6 +43,12 @@ public class ProductLongRVAdapter extends RecyclerView.Adapter<ProductLongRVAdap
         holder.wolliesIV.setImageResource(productLongRVModelArrayList.get(position).getWollies());
         holder.colesPriceTV.setText(productLongRVModelArrayList.get(position).getColesPrice());
         holder.colesIV.setImageResource(productLongRVModelArrayList.get(position).getColes());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(productLongRVModelArrayList.get(position).getNavRoot());
+            }
+        });
     }
 
     @Override

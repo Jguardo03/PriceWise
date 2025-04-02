@@ -2,9 +2,11 @@ package com.example.pricewisev2;
 
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.pricewisev2.data.user.UserViewModel;
 import com.example.pricewisev2.databinding.HeaderBinding;
 
 public class HeaderHelper {
@@ -16,7 +18,9 @@ public class HeaderHelper {
         binding = HeaderBinding.bind(view.findViewById(R.id.idIncludeHeader));
         navController = Navigation.findNavController(view);
     }
-
+    public void setAddress (String address){
+        binding.textViewAddress.setText(address);
+    }
     public void setUpBackNavigation(){
         if (binding != null) {
             binding.imageViewBackArrow.setOnClickListener(v -> navController.navigateUp());

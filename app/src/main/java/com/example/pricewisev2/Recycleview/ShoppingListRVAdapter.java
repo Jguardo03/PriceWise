@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pricewisev2.R;
-import com.example.pricewisev2.data.shoppinglist.ShoppingListEntity;
+
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout24"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CocaCola125Fragment">
+    <include
+        android:id="@+id/idIncludeHeader"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/idTVProductNameC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:gravity="center"
+        android:text="Coca-Cola 1.25L"
+        android:textColor="@color/Green"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/idIVProductC"
+        android:layout_width="217dp"
+        android:layout_height="290dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/product_card"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTVProductNameC"
+        app:srcCompat="@drawable/shopping_cart" />
+
+    <ImageView
+        android:id="@+id/idIVAldiC"
+        android:layout_width="85dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:padding="4dp"
+        app:layout_constraintStart_toEndOf="@+id/idIVProductC"
+        app:layout_constraintTop_toBottomOf="@+id/idTVProductNameC"
+        app:srcCompat="@drawable/aldi" />
+
+    <TextView
+        android:id="@+id/idTVAldiPriceC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="76dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="$10.00"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/idIVAldiC"
+        app:layout_constraintTop_toBottomOf="@+id/idTVProductNameC" />
+
+    <ImageView
+
+        android:id="@+id/idIVWollisC"
+        android:layout_width="85dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+        android:src="@drawable/wollis"
+        app:layout_constraintStart_toEndOf="@+id/idIVProductC"
+        app:layout_constraintTop_toBottomOf="@+id/idIVAldiC" />
+
+    <TextView
+        android:id="@+id/idTVWollisPriceC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="88dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="$8.00"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/idIVWollisC"
+        app:layout_constraintTop_toBottomOf="@+id/idTVAldiPriceC" />
+
+    <ImageView
+
+        android:id="@+id/idIVColesC"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:padding="4dp"
+        android:src="@drawable/coles"
+        app:layout_constraintStart_toEndOf="@+id/idIVProductC"
+        app:layout_constraintTop_toBottomOf="@+id/idIVWollisC" />
+
+    <TextView
+        android:id="@+id/idTVColesPriceC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="69dp"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="$5.00"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/idIVColesC"
+        app:layout_constraintTop_toBottomOf="@+id/idTVWollisPriceC" />
+
+    <TextView
+        android:id="@+id/idTVProductDescriptionC2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idIVProductC" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,8 +10,9 @@ public class ProductLongRVModel {
     private int wollies;
     private String colesPrice;
     private int coles;
+    private int navRoot;
 
-    public ProductLongRVModel(int productImage, String productName, int coles, String colesPrice, int wollies, String wollisPrice, int aldi, String aldiPrice) {
+    public ProductLongRVModel(int productImage, String productName, int coles, String colesPrice, int wollies, String wollisPrice, int aldi, String aldiPrice,int navRoot) {
         this.productImage = productImage;
         this.coles = coles;
         this.colesPrice = colesPrice;
@@ -20,6 +21,7 @@ public class ProductLongRVModel {
         this.aldi = aldi;
         this.aldiPrice = aldiPrice;
         this.productName = productName;
+        this.navRoot = navRoot;
     }
 
     public int getProductImage() {
@@ -84,5 +86,13 @@ public class ProductLongRVModel {
 
     public void setColes(int coles) {
         this.coles = coles;
+    }
+
+    public int getNavRoot() {
+        return navRoot;
+    }
+
+    public void setNavRoot(int navRoot) {
+        this.navRoot = navRoot;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.pricewisev2;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -10,22 +11,38 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.pricewisev2.Recycleview.CategoriesRVAdapter;
 import com.example.pricewisev2.Recycleview.CategoriesRVModel;
 import com.example.pricewisev2.Recycleview.ProductRVApater;
 import com.example.pricewisev2.Recycleview.ProductRVModel;
+import com.example.pricewisev2.data.user.UserDao;
+import com.example.pricewisev2.data.user.UserEntity;
+import com.example.pricewisev2.data.user.UserViewModel;
+import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentDashboardBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel mViewModel;
+    private UserViewModel userViewModel;
 
     private RecyclerView pRV;
     private ArrayList<ProductRVModel> productRVModelArrayList;
@@ -41,19 +58,38 @@ public class DashboardFragment extends Fragment {
         return new DashboardFragment();
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        View view = binding.getRoot();
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        super.onViewCreated(view, savedInstanceState);
+// Header setUp
+        if(getActivity() != null){
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
+        userViewModel = new ViewModelProvider(requireActivity(), new UserViewModelFactory(requireActivity().getApplication()))
+                .get(UserViewModel.class);
         HeaderHelper headerHelper = new HeaderHelper(view);
-//        headerHelper.setAddress();
+        headerHelper.setUpBackNavigation();
+        userViewModel.getAllUses().observe(getViewLifecycleOwner(), new Observer<List<UserEntity>>() {
+            @Override
+            public void onChanged(List<UserEntity> userEntities) {
+                if(userEntities != null && !userEntities.isEmpty()){
+                   for(UserEntity user: userEntities){
+                       String address;
+                       address = user.userAddress;
+                       headerHelper.setAddress(address);
+                   }
+                }
+            }
+        });
         headerHelper.setUpBackNavigation();
         pRV = view.findViewById(R.id.idRVDeals);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -73,7 +109,6 @@ public class DashboardFragment extends Fragment {
         cRV.setAdapter(categoriesRVAdapter);
         addDataToCategoryList();
         categoriesRVAdapter.notifyDataSetChanged();
-
     }
     private void addDataToList(){
         productRVModelArrayList.add(new ProductRVModel("$5.00","Vegetable Oil", "$10.00",R.drawable.shopping_cart,R.drawable.aldi));

@@ -12,13 +12,17 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.pricewisev2.databinding.FragmentMainBinding;
+import com.example.pricewisev2.data.user.UserEntity;
+import com.example.pricewisev2.data.user.UserViewModel;
+import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentRegisterBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class RegisterFragment extends Fragment {
 
-    private RegisterViewModel mViewModel;
+    private UserViewModel userViewModel;
     private FragmentRegisterBinding binding;
 
     public static RegisterFragment newInstance() {
@@ -36,19 +40,73 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(getActivity() != null){
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+            bottomNavigationView.setVisibility(View.GONE);
+        }
+        // Initialize the UserViewModel
+        userViewModel = new ViewModelProvider(requireActivity(),
+                new UserViewModelFactory(requireActivity().getApplication()))
+                .get(UserViewModel.class);
+
         binding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_dashboardFragment);
+                String password = binding.ideditTextPasword.getText().toString().trim();
+                String conPassword = binding.ideditTextConfirmPassword.getText().toString().trim();
+                String userName = binding.ideditTextUserName.getText().toString().trim();
+                String address = binding.ideditTextAddress.getText().toString().trim();
+
+                if (password.isEmpty() || conPassword.isEmpty() || userName.isEmpty() || address.isEmpty()) {
+                    Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!password.equals(conPassword)) {
+                    Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check for existing username
+                userViewModel.getAllUses().observe(getViewLifecycleOwner(), users -> {
+                    if (users != null && !users.isEmpty()) {
+                        boolean usernameExists = false;
+                        for (UserEntity user : users) {
+                            if (user.userName.equals(userName)) {
+                                usernameExists = true;
+                                break;
+                            }
+                        }
+                        if (usernameExists) {
+                            Toast.makeText(getActivity(), "Username already exists", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    // If username doesn't exist, proceed with registration
+                    UserEntity newUser = new UserEntity();
+                    newUser.userName = userName;
+                    newUser.userPassword = password;
+                    newUser.userAddress = address;
+
+                    userViewModel.insert(newUser);
+                    Toast.makeText(getActivity(), "Registration successful", Toast.LENGTH_SHORT).show();
+                    Navigation.findNavController(view).navigate(R.id.mainFragment);
+                });
             }
         });
     }
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(getActivity() != null){
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        // TODO: Use the ViewModel
+        // Remove the RegisterViewModel initialization as we're using UserViewModel
     }
-
 }
