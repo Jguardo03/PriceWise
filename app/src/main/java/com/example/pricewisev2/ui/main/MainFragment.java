@@ -94,6 +94,7 @@ public class MainFragment extends Fragment {
                                 Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_dashboardFragment);
                             } else {
                                 Toast.makeText(getActivity(), "Username or Password Incorrect", Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                             Toast.makeText(getActivity(), "Invalid credentials", Toast.LENGTH_SHORT).show();
