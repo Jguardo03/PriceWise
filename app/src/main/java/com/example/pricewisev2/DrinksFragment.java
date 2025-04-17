@@ -72,6 +72,7 @@ public class DrinksFragment extends Fragment {
                 }
             }
         });
+        headerHelper.setUpBackNavigation();
 
         pRV = view.findViewById(R.id.idRVProduct);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -80,18 +81,18 @@ public class DrinksFragment extends Fragment {
         productLongRVAdapter = new ProductLongRVAdapter(productLongRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productLongRVAdapter);
-        addDataToList();
+        //addDataToList();
         productLongRVAdapter.notifyDataSetChanged();
     }
 
-    private void addDataToList() {
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Pepsi Multipack",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.pepsiMultipackFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Coca-cola 1.25L",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cocaCola125Fragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Nescafe Blend Espresso",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.nescafeBlendExpressoFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Coconut Water",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cocaCola125Fragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Monster Energy Drink",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.monsterEnergyDrinkFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Ice Coffee Boss",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.iceCoffeMrBossFragment));
-    }
+//    private void addDataToList() {
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Pepsi Multipack",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.pepsiMultipackFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Coca-cola 1.25L",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cocaCola125Fragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Nescafe Blend Espresso",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.nescafeBlendExpressoFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Coconut Water",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cocaCola125Fragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Monster Energy Drink",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.monsterEnergyDrinkFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Ice Coffee Boss",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.iceCoffeMrBossFragment));
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

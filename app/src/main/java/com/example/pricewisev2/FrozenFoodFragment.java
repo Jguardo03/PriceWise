@@ -80,18 +80,18 @@ public class FrozenFoodFragment extends Fragment {
         productLongRVAdapter = new ProductLongRVAdapter(productLongRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productLongRVAdapter);
-        addDataToList();
+        //addDataToList();
         productLongRVAdapter.notifyDataSetChanged();
     }
 
-    private void addDataToList() {
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Drumstick Ice Cream",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.drumbStickIceCreamFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Vanilla Ice Cream 1L",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.vanillaIceCream1LFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Sausage Rolls 4 pck",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.sausageRollsFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Frozen Peas",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.frozenPeasFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Hash Browns",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.hashbrownsFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Frozen Fries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.frozenFriesFragment));
-    }
+//    private void addDataToList() {
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Drumstick Ice Cream",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.drumbStickIceCreamFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Vanilla Ice Cream 1L",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.vanillaIceCream1LFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Sausage Rolls 4 pck",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.sausageRollsFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Frozen Peas",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.frozenPeasFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Hash Browns",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.hashbrownsFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Frozen Fries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.frozenFriesFragment));
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

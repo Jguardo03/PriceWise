@@ -19,11 +19,17 @@ import android.widget.Toast;
 
 import com.example.pricewisev2.Recycleview.ProductLongRVAdapter;
 import com.example.pricewisev2.Recycleview.ProductLongRVModel;
+import com.example.pricewisev2.Recycleview.ProductRVModel;
 import com.example.pricewisev2.data.user.UserEntity;
 import com.example.pricewisev2.data.user.UserViewModel;
 import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentDairyAndEggBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +64,7 @@ public class DairyAndEggFragment extends Fragment {
             BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
             bottomNavigationView.setVisibility(View.VISIBLE);
         }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         userViewModel = new ViewModelProvider(requireActivity(), new UserViewModelFactory(requireActivity().getApplication()))
                 .get(UserViewModel.class);
         HeaderHelper headerHelper = new HeaderHelper(view);
@@ -82,8 +89,39 @@ public class DairyAndEggFragment extends Fragment {
         productLongRVAdapter = new ProductLongRVAdapter(productLongRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productLongRVAdapter);
-        addDataToList();
-        productLongRVAdapter.notifyDataSetChanged();
+        db.collection("products").whereEqualTo("category","Dairy and Egg")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            productLongRVModelArrayList.clear();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                String productName = document.getString("name");
+                                String productImage = document.getString("productImage");
+                                String colesPrice = String.valueOf(document.getDouble("colesprice"));
+                                String wollisPrice = String.valueOf(document.getDouble("wollisprice"));
+                                String aldiPrice = String.valueOf(document.getDouble("aldiprice"));
+                                String aldiImage = document.getString("aldiImage");
+                                String colesImage = document.getString("colesImage");
+                                String wollisImage = document.getString("wollisImage");
+
+                                ProductLongRVModel product= new ProductLongRVModel(
+                                        productImage,
+                                        productName,
+                                        colesImage,
+                                        "$"+colesPrice,
+                                        wollisImage,
+                                        "$"+wollisPrice,
+                                        aldiImage,
+                                        "$"+aldiPrice,R.id.milkFragment);
+                                productLongRVModelArrayList.add(product);
+                            }
+                            productLongRVAdapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(getContext(),"Error loading products",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
         binding.idTVCName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +136,12 @@ public class DairyAndEggFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(DairyAndEggViewModel.class);
     }
 
-    private void addDataToList() {
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Milk",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.milkFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Cheese",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cheeseFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Butter",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.butterFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Egg",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.eggFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Yogurt",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.yogurtFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Almond Milk",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.almondMilkFragment));
-    }
+//    private void addDataToList() {
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Milk",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.milkFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Cheese",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.cheeseFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Butter",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.butterFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Egg",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.eggFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Yogurt",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.yogurtFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Almond Milk",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.almondMilkFragment));
+//    }
 }

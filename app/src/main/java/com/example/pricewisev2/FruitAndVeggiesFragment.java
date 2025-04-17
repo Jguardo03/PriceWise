@@ -81,18 +81,18 @@ public class FruitAndVeggiesFragment extends Fragment {
         productLongRVAdapter = new ProductLongRVAdapter(productLongRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productLongRVAdapter);
-        addDataToList();
+        //addDataToList();
         productLongRVAdapter.notifyDataSetChanged();
     }
 
-    private void addDataToList() {
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Fresh Banana",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.freshBananaFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Fresh Strawberries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.freshStrawberriesFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Blue Berries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.blueBerriesFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Red Capsicum",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.action_fruitAndVeggiesFragment_to_RedCapsicumFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Brocoli",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.brocoliFragment));
-        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Lettuce",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.lettuceFragment));
-    }
+//    private void addDataToList() {
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Fresh Banana",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.freshBananaFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Fresh Strawberries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.freshStrawberriesFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Blue Berries",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.blueBerriesFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Red Capsicum",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.action_fruitAndVeggiesFragment_to_RedCapsicumFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Brocoli",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.brocoliFragment));
+//        productLongRVModelArrayList.add(new ProductLongRVModel(R.drawable.shopping_cart,"Lettuce",R.drawable.coles,"$10.00", R.drawable.wollis,"$8.00",R.drawable.aldi,"$12.00",R.id.lettuceFragment));
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

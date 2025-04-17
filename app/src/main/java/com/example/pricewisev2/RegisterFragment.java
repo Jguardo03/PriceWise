@@ -18,7 +18,12 @@ import com.example.pricewisev2.data.user.UserEntity;
 import com.example.pricewisev2.data.user.UserViewModel;
 import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentRegisterBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class RegisterFragment extends Fragment {
 
@@ -67,32 +72,42 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
 
-                // Check for existing username
-                userViewModel.getAllUses().observe(getViewLifecycleOwner(), users -> {
-                    if (users != null && !users.isEmpty()) {
-                        boolean usernameExists = false;
-                        for (UserEntity user : users) {
-                            if (user.userName.equals(userName)) {
-                                usernameExists = true;
-                                break;
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                // Check for existing username in Firestore
+                db.collection("users")
+                        .whereEqualTo("userName", userName)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                QuerySnapshot querySnapshot = task.getResult();
+                                if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                    // Username already exists
+                                    Toast.makeText(getActivity(), "Username already exists", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // Username doesn't exist, proceed with registration
+                                    UserEntity newUser = new UserEntity();
+                                    newUser.userName = userName;
+                                    newUser.userPassword = password;
+                                    newUser.userAddress = address;
+
+                                    // Add to Firestore
+                                    db.collection("users")
+                                            .add(newUser)
+                                            .addOnSuccessListener(documentReference -> {
+//                                                // Add to local Room database
+//                                                userViewModel.insert(newUser);
+//                                                Toast.makeText(getActivity(), "Registration successful", Toast.LENGTH_SHORT).show();
+//                                                Navigation.findNavController(view).navigate(R.id.mainFragment);
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Toast.makeText(getActivity(), "Registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            });
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "Error checking username: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        if (usernameExists) {
-                            Toast.makeText(getActivity(), "Username already exists", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                    // If username doesn't exist, proceed with registration
-                    UserEntity newUser = new UserEntity();
-                    newUser.userName = userName;
-                    newUser.userPassword = password;
-                    newUser.userAddress = address;
-
-                    userViewModel.insert(newUser);
-                    Toast.makeText(getActivity(), "Registration successful", Toast.LENGTH_SHORT).show();
-                    Navigation.findNavController(view).navigate(R.id.mainFragment);
-                });
+                        });
             }
         });
     }

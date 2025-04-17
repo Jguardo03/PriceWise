@@ -2,17 +2,17 @@ package com.example.pricewisev2.Recycleview;
 
 public class ProductLongRVModel {
 
-    private int productImage;
+    private String productImage;
     private String productName;
     private String aldiPrice;
-    private int aldi;
+    private String aldi;
     private String wollisPrice;
-    private int wollies;
+    private String wollies;
     private String colesPrice;
-    private int coles;
+    private String coles;
     private int navRoot;
 
-    public ProductLongRVModel(int productImage, String productName, int coles, String colesPrice, int wollies, String wollisPrice, int aldi, String aldiPrice,int navRoot) {
+    public ProductLongRVModel(String productImage, String productName, String coles, String colesPrice, String wollies, String wollisPrice, String aldi, String aldiPrice,int navRoot) {
         this.productImage = productImage;
         this.coles = coles;
         this.colesPrice = colesPrice;
@@ -24,11 +24,11 @@ public class ProductLongRVModel {
         this.navRoot = navRoot;
     }
 
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
@@ -48,11 +48,11 @@ public class ProductLongRVModel {
         this.aldiPrice = aldiPrice;
     }
 
-    public int getAldi() {
+    public String getAldi() {
         return aldi;
     }
 
-    public void setAldi(int aldi) {
+    public void setAldi(String aldi) {
         this.aldi = aldi;
     }
 
@@ -64,11 +64,11 @@ public class ProductLongRVModel {
         this.wollisPrice = wollisPrice;
     }
 
-    public int getWollies() {
+    public String getWollies() {
         return wollies;
     }
 
-    public void setWollies(int wollies) {
+    public void setWollies(String wollies) {
         this.wollies = wollies;
     }
 
@@ -80,11 +80,11 @@ public class ProductLongRVModel {
         this.colesPrice = colesPrice;
     }
 
-    public int getColes() {
+    public String getColes() {
         return coles;
     }
 
-    public void setColes(int coles) {
+    public void setColes(String coles) {
         this.coles = coles;
     }
 

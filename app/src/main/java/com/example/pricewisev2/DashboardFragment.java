@@ -3,6 +3,7 @@ package com.example.pricewisev2;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ import com.example.pricewisev2.data.user.UserEntity;
 import com.example.pricewisev2.data.user.UserViewModel;
 import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentDashboardBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,9 +38,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DashboardFragment extends Fragment {
 
@@ -74,6 +81,7 @@ public class DashboardFragment extends Fragment {
             BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
             bottomNavigationView.setVisibility(View.VISIBLE);
         }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         userViewModel = new ViewModelProvider(requireActivity(), new UserViewModelFactory(requireActivity().getApplication()))
                 .get(UserViewModel.class);
         HeaderHelper headerHelper = new HeaderHelper(view);
@@ -91,6 +99,7 @@ public class DashboardFragment extends Fragment {
             }
         });
         headerHelper.setUpBackNavigation();
+
         pRV = view.findViewById(R.id.idRVDeals);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -98,8 +107,35 @@ public class DashboardFragment extends Fragment {
         productRVApater = new ProductRVApater(productRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productRVApater);
-        addDataToList();
-        productRVApater.notifyDataSetChanged();
+        db.collection("products").whereGreaterThan("discount",1)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            productRVModelArrayList.clear();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                String productName = document.getString("name");
+                                String discount = String.valueOf(document.getDouble("discount"));
+                                String discountPrice = String.valueOf(document.getDouble("discountPrice"));
+                                String productImage = document.getString("productImage");
+                                String merchantImage = document.getString("merchantImage");
+
+                                ProductRVModel product= new ProductRVModel(
+                                        "%"+discount,
+                                        productName,
+                                        "$"+discountPrice,
+                                        productImage,
+                                        merchantImage);
+                                productRVModelArrayList.add(product);
+                            }
+                            productRVApater.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(getContext(),"Error loading products",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+//        addDataToList();
+//        productRVApater.notifyDataSetChanged();
 
         cRV = view.findViewById(R.id.idRVCategories);
         LinearLayoutManager categoryLinearLayoutManager = new GridLayoutManager(getActivity(),  3);
@@ -110,12 +146,12 @@ public class DashboardFragment extends Fragment {
         addDataToCategoryList();
         categoriesRVAdapter.notifyDataSetChanged();
     }
-    private void addDataToList(){
-        productRVModelArrayList.add(new ProductRVModel("$5.00","Vegetable Oil", "$10.00",R.drawable.shopping_cart,R.drawable.aldi));
-        productRVModelArrayList.add(new ProductRVModel("$2.00","Lentils Can", "$40.00",R.drawable.shopping_cart,R.drawable.wollis));
-        productRVModelArrayList.add(new ProductRVModel("$3.00","ALmond Milk", "$8.00",R.drawable.shopping_cart,R.drawable.coles));
-
-    }
+//    private void addDataToList(){
+//        productRVModelArrayList.add(new ProductRVModel("$5.00","Vegetable Oil", "$10.00",R.drawable.shopping_cart,R.drawable.aldi));
+//        productRVModelArrayList.add(new ProductRVModel("$2.00","Lentils Can", "$40.00",R.drawable.shopping_cart,R.drawable.wollis));
+//        productRVModelArrayList.add(new ProductRVModel("$3.00","ALmond Milk", "$8.00",R.drawable.shopping_cart,R.drawable.coles));
+//
+//    }
 
     private void addDataToCategoryList(){
         categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.dalle4,"Dairy and Egg",R.id.dairyAndEggFragment));

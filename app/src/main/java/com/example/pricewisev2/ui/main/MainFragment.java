@@ -22,42 +22,29 @@ import com.example.pricewisev2.data.user.UserViewModel;
 import com.example.pricewisev2.data.user.UserViewModelFactory;
 import com.example.pricewisev2.databinding.FragmentMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
-
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainFragment extends Fragment {
 
-    private MainViewModel mViewModel;
-    private UserViewModel userViewModel;
     private FragmentMainBinding binding;
-
+    private UserViewModel userViewModel;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-      // TODO: Use the ViewModel
-    }
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         if(getActivity() != null){
             BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
             bottomNavigationView.setVisibility(View.GONE);
@@ -74,35 +61,29 @@ public class MainFragment extends Fragment {
                     return;
                 }
 
-                userViewModel = new ViewModelProvider(requireActivity(),
-                        new UserViewModelFactory(requireActivity().getApplication()))
-                        .get(UserViewModel.class);
-                
-                userViewModel.getAllUses().observe(getViewLifecycleOwner(), new Observer<List<UserEntity>>() {
-                    @Override
-                    public void onChanged(List<UserEntity> users) {
-                        if (users != null && !users.isEmpty()) {
-                            boolean isAuthenticated = false;
-                            for (UserEntity user : users) {
-                                if (user.userName.equals(username) && user.userPassword.equals(password)) {
-                                    isAuthenticated = true;
-                                    break;
+                // Query Firestore for user authentication
+                db.collection("users")
+                        .whereEqualTo("userName", username)
+                        .whereEqualTo("userPassword", password)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                QuerySnapshot querySnapshot = task.getResult();
+                                if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                    // User authenticated successfully
+                                    Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_dashboardFragment);
+                                } else {
+                                    // Authentication failed
+                                    Toast.makeText(getActivity(), "Username or Password Incorrect", Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                            
-                            if (isAuthenticated) {
-                                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_dashboardFragment);
                             } else {
-                                Toast.makeText(getActivity(), "Username or Password Incorrect", Toast.LENGTH_SHORT).show();
-
+                                // Error occurred
+                                Toast.makeText(getActivity(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(getActivity(), "Invalid credentials", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                        });
             }
         });
+
         binding.idbuttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

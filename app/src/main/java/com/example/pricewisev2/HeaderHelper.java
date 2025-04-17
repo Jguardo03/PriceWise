@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.pricewisev2.data.user.UserViewModel;
+
 import com.example.pricewisev2.databinding.HeaderBinding;
 
 public class HeaderHelper {

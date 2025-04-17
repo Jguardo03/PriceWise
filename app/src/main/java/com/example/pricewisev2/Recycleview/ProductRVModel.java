@@ -5,16 +5,16 @@ public class ProductRVModel {
     private String discount;
     private String productName;
     private String productPrice;
-    private int productImage;
-    private int merchantImage;
+    private String productImageUrl;
+    private String merchantImageUrl;
 
 
-    public ProductRVModel(String discount, String productName, String productPrice, int productImage, int merchantImage) {
+    public ProductRVModel(String discount, String productName, String productPrice, String productImageUrl, String merchantImageUrl) {
         this.discount = discount;
         this.productName = productName;
         this.productPrice = productPrice;
-        this.productImage = productImage;
-        this.merchantImage = merchantImage;
+        this.productImageUrl = productImageUrl;
+        this.merchantImageUrl = merchantImageUrl;
     }
 
     public String getDiscount() {
@@ -41,20 +41,20 @@ public class ProductRVModel {
         this.productPrice = productPrice;
     }
 
-    public int getProductImage() {
-        return productImage;
+    public String getProductImageUrl() {
+        return productImageUrl;
     }
 
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
     }
 
-    public int getMerchantImage() {
-        return merchantImage;
+    public String getMerchantImageUrl() {
+        return merchantImageUrl;
     }
 
-    public void setMerchantImage(int merchantImage) {
-        this.merchantImage = merchantImage;
+    public void setMerchantImageUrl(String merchantImageUrl) {
+        this.merchantImageUrl = merchantImageUrl;
     }
 
 

@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.pricewisev2.R;
 
 import java.util.ArrayList;
@@ -35,18 +37,67 @@ public class ProductLongRVAdapter extends RecyclerView.Adapter<ProductLongRVAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.productIV.setImageResource(productLongRVModelArrayList.get(position).getProductImage());
-        holder.productNameTV.setText(productLongRVModelArrayList.get(position).getProductName());
-        holder.aldiPriceTV.setText(productLongRVModelArrayList.get(position).getAldiPrice());
-        holder.aldiIV.setImageResource(productLongRVModelArrayList.get(position).getAldi());
-        holder.wolliesPriceTV.setText(productLongRVModelArrayList.get(position).getWollisPrice());
-        holder.wolliesIV.setImageResource(productLongRVModelArrayList.get(position).getWollies());
-        holder.colesPriceTV.setText(productLongRVModelArrayList.get(position).getColesPrice());
-        holder.colesIV.setImageResource(productLongRVModelArrayList.get(position).getColes());
+        ProductLongRVModel product = productLongRVModelArrayList.get(position);
+        
+        // Load product image
+        if (product.getProductImage() != null && !product.getProductImage().isEmpty()) {
+            Glide.with(context)
+                .load(product.getProductImage())
+                .placeholder(R.drawable.shopping_cart)
+                .error(R.drawable.shopping_cart)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.productIV);
+        } else {
+            holder.productIV.setImageResource(R.drawable.shopping_cart);
+        }
+
+        holder.productNameTV.setText(product.getProductName());
+        holder.aldiPriceTV.setText(product.getAldiPrice());
+
+        // Load Aldi logo
+        if (product.getAldi() != null && !product.getAldi().isEmpty()) {
+            Glide.with(context)
+                .load(product.getAldi())
+                .placeholder(R.drawable.aldi)
+                .error(R.drawable.aldi)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.aldiIV);
+        } else {
+            holder.aldiIV.setImageResource(R.drawable.aldi);
+        }
+
+        holder.wolliesPriceTV.setText(product.getWollisPrice());
+
+        // Load Woolworths logo
+        if (product.getWollies() != null && !product.getWollies().isEmpty()) {
+            Glide.with(context)
+                .load(product.getWollies())
+                .placeholder(R.drawable.wollis)
+                .error(R.drawable.wollis)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.wolliesIV);
+        } else {
+            holder.wolliesIV.setImageResource(R.drawable.wollis);
+        }
+
+        holder.colesPriceTV.setText(product.getColesPrice());
+
+        // Load Coles logo
+        if (product.getColes() != null && !product.getColes().isEmpty()) {
+            Glide.with(context)
+                .load(product.getColes())
+                .placeholder(R.drawable.coles)
+                .error(R.drawable.coles)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.colesIV);
+        } else {
+            holder.colesIV.setImageResource(R.drawable.coles);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(productLongRVModelArrayList.get(position).getNavRoot());
+                Navigation.findNavController(v).navigate(product.getNavRoot());
             }
         });
     }
