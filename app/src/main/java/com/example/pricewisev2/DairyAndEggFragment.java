@@ -115,6 +115,7 @@ public class DairyAndEggFragment extends Fragment {
                                         aldiImage,
                                         "$"+aldiPrice,R.id.milkFragment);
                                 productLongRVModelArrayList.add(product);
+
                             }
                             productLongRVAdapter.notifyDataSetChanged();
                         }else{
