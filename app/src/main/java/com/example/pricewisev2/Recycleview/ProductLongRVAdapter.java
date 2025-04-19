@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,10 +23,19 @@ public class ProductLongRVAdapter extends RecyclerView.Adapter<ProductLongRVAdap
     private ArrayList<ProductLongRVModel> productLongRVModelArrayList;
 
     private Context context;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener{
+        void onItemClick(String productId);
+    }
 
     public ProductLongRVAdapter(ArrayList<ProductLongRVModel> productLongRVModelArrayList, Context context) {
         this.productLongRVModelArrayList = productLongRVModelArrayList;
         this.context = context;
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,7 +48,14 @@ public class ProductLongRVAdapter extends RecyclerView.Adapter<ProductLongRVAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductLongRVModel product = productLongRVModelArrayList.get(position);
-        
+
+        //Set on click listener
+        holder.itemView.setOnClickListener(v->{
+            if(listener!=null){
+                String productId = product.getProductID();
+                listener.onItemClick(productId);
+            }
+        });
         // Load product image
         if (product.getProductImage() != null && !product.getProductImage().isEmpty()) {
             Glide.with(context)
@@ -93,13 +110,6 @@ public class ProductLongRVAdapter extends RecyclerView.Adapter<ProductLongRVAdap
         } else {
             holder.colesIV.setImageResource(R.drawable.coles);
         }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(product.getNavRoot());
-            }
-        });
     }
 
     @Override

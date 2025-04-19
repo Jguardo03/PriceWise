@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,6 @@ public class DairyAndEggFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         // Header setUp
         if(getActivity() != null){
             BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
@@ -89,6 +89,18 @@ public class DairyAndEggFragment extends Fragment {
         productLongRVAdapter = new ProductLongRVAdapter(productLongRVModelArrayList,getActivity());
         pRV.setLayoutManager(linearLayoutManager);
         pRV.setAdapter(productLongRVAdapter);
+        productLongRVAdapter.setListener(productId -> {
+            Log.d("DairyAndEggFragment", "Item clicked, productId: " + productId);
+            if (productId != null && !productId.isEmpty()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("productId", productId);
+                Log.d("DairyAndEggFragment", "Navigating with bundle: " + bundle.toString());
+                Navigation.findNavController(view).navigate(R.id.productFragment, bundle);
+            } else {
+                Log.e("DairyAndEggFragment", "Invalid productId received in click listener");
+                Toast.makeText(getContext(), "Error: Invalid product", Toast.LENGTH_SHORT).show();
+            }
+        });
         db.collection("products").whereEqualTo("category","Dairy and Egg")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -104,6 +116,8 @@ public class DairyAndEggFragment extends Fragment {
                                 String aldiImage = document.getString("aldiImage");
                                 String colesImage = document.getString("colesImage");
                                 String wollisImage = document.getString("wollisImage");
+                                String productID = document.getId();
+                                Log.d("bundle","Id = "+productID);
 
                                 ProductLongRVModel product= new ProductLongRVModel(
                                         productImage,
@@ -113,22 +127,18 @@ public class DairyAndEggFragment extends Fragment {
                                         wollisImage,
                                         "$"+wollisPrice,
                                         aldiImage,
-                                        "$"+aldiPrice,R.id.milkFragment);
+                                        "$"+aldiPrice,R.id.productFragment,
+                                        productID);
                                 productLongRVModelArrayList.add(product);
-
-                            }
+                                }
                             productLongRVAdapter.notifyDataSetChanged();
                         }else{
                             Toast.makeText(getContext(),"Error loading products",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-        binding.idTVCName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.milkFragment);
-            }
-        });
+
+
     }
 
     @Override

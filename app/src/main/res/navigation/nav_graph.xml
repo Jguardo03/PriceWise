@@ -34,6 +34,9 @@
         <argument
             android:name="addressArg"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_pantryFragment"
+            app:destination="@id/pantryFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoppingListFragment"
@@ -87,9 +90,6 @@
         <argument
             android:name="addressArg"
             app:argType="string"/>
-        <action
-            android:id="@+id/action_fruitAndVeggiesFragment_to_RedCapsicumFragment"
-            app:destination="@id/RedCapsicumFragment" />
     </fragment>
     <fragment
         android:id="@+id/drinksFragment"
@@ -127,185 +127,15 @@
             android:name="addressArg"
             app:argType="string"/>
     </fragment>
-    <fragment
-        android:id="@+id/milkFragment"
-        android:name="com.example.pricewisev2.MilkFragment"
-        android:label="fragment_milk"
-        tools:layout="@layout/fragment_milk" />
-    <fragment
-        android:id="@+id/eggFragment"
-        android:name="com.example.pricewisev2.EggFragment"
-        android:label="fragment_egg"
-        tools:layout="@layout/fragment_egg" />
-    <fragment
-        android:id="@+id/almondMilkFragment"
-        android:name="com.example.pricewisev2.AlmondMilkFragment"
-        android:label="fragment_almond_milk"
-        tools:layout="@layout/fragment_almond_milk" />
-    <fragment
-        android:id="@+id/butterFragment"
-        android:name="com.example.pricewisev2.ButterFragment"
-        android:label="fragment_butter"
-        tools:layout="@layout/fragment_butter" />
 
     <fragment
-        android:id="@+id/freshBananaFragment"
-        android:name="com.example.pricewisev2.FreshBananaFragment"
-        android:label="fragment_fresh_banana"
-        tools:layout="@layout/fragment_fresh_banana" />
-    <fragment
-        android:id="@+id/lettuceFragment"
-        android:name="com.example.pricewisev2.LettuceFragment"
-        android:label="fragment_lettuce"
-        tools:layout="@layout/fragment_lettuce" />
-    <fragment
-        android:id="@+id/brocoliFragment"
-        android:name="com.example.pricewisev2.BrocoliFragment"
-        android:label="fragment_brocoli"
-        tools:layout="@layout/fragment_brocoli" />
-    <fragment
-        android:id="@+id/RedCapsicumFragment"
-        android:name="com.example.pricewisev2.RedCapsicumFragment"
-        android:label="fragment_red_capsicum"
-        tools:layout="@layout/fragment_red_capsicum" />
-    <fragment
-        android:id="@+id/blueBerriesFragment"
-        android:name="com.example.pricewisev2.BlueBerriesFragment"
-        android:label="fragment_blue_berries"
-        tools:layout="@layout/fragment_blue_berries" />
-    <fragment
-        android:id="@+id/freshStrawberriesFragment"
-        android:name="com.example.pricewisev2.FreshStrawberriesFragment"
-        android:label="fragment_fresh_strawberries"
-        tools:layout="@layout/fragment_fresh_strawberries" />
-    <fragment
-        android:id="@+id/pepsiMultipackFragment"
-        android:name="com.example.pricewisev2.PepsiMultipackFragment"
-        android:label="fragment_pepsi_multipack"
-        tools:layout="@layout/fragment_pepsi_multipack" />
-    <fragment
-        android:id="@+id/cocaCola125Fragment"
-        android:name="com.example.pricewisev2.CocaCola125Fragment"
-        android:label="fragment_coca_cola125"
-        tools:layout="@layout/fragment_coca_cola125" />
-    <fragment
-        android:id="@+id/nescafeBlendExpressoFragment"
-        android:name="com.example.pricewisev2.NescafeBlendExpressoFragment"
-        android:label="fragment_nescafe_blend_expresso"
-        tools:layout="@layout/fragment_nescafe_blend_expresso" />
-    <fragment
-        android:id="@+id/coconutWaterFragment"
-        android:name="com.example.pricewisev2.CoconutWaterFragment"
-        android:label="fragment_coconut_water"
-        tools:layout="@layout/fragment_coconut_water" />
-    <fragment
-        android:id="@+id/monsterEnergyDrinkFragment"
-        android:name="com.example.pricewisev2.MonsterEnergyDrinkFragment"
-        android:label="fragment_monster_energy_drink"
-        tools:layout="@layout/fragment_monster_energy_drink" />
-    <fragment
-        android:id="@+id/iceCoffeMrBossFragment"
-        android:name="com.example.pricewisev2.IceCoffeMrBossFragment"
-        android:label="fragment_ice_coffe_mr_boss"
-        tools:layout="@layout/fragment_ice_coffe_mr_boss" />
-    <fragment
-        android:id="@+id/muffinsFragment"
-        android:name="com.example.pricewisev2.MuffinsFragment"
-        android:label="fragment_muffins"
-        tools:layout="@layout/fragment_muffins" />
-    <fragment
-        android:id="@+id/vanillaCakeFragment"
-        android:name="com.example.pricewisev2.VanillaCakeFragment"
-        android:label="fragment_vanilla_cake"
-        tools:layout="@layout/fragment_vanilla_cake" />
-    <fragment
-        android:id="@+id/whiteBreadFragment"
-        android:name="com.example.pricewisev2.WhiteBreadFragment"
-        android:label="fragment_white_bread"
-        tools:layout="@layout/fragment_white_bread" />
-    <fragment
-        android:id="@+id/plainWrapFragment"
-        android:name="com.example.pricewisev2.PlainWrapFragment"
-        android:label="fragment_plain_wrap"
-        tools:layout="@layout/fragment_plain_wrap" />
-    <fragment
-        android:id="@+id/tacoSheelsFragment"
-        android:name="com.example.pricewisev2.TacoSheelsFragment"
-        android:label="fragment_taco_sheels"
-        tools:layout="@layout/fragment_taco_sheels" />
-    <fragment
-        android:id="@+id/englishMuffinsFragment"
-        android:name="com.example.pricewisev2.EnglishMuffinsFragment"
-        android:label="fragment_english_muffins"
-        tools:layout="@layout/fragment_english_muffins" />
-    <fragment
-        android:id="@+id/drumbStickIceCreamFragment"
-        android:name="com.example.pricewisev2.DrumbStickIceCreamFragment"
-        android:label="fragment_drumb_stick_ice_cream"
-        tools:layout="@layout/fragment_drumb_stick_ice_cream" />
-    <fragment
-        android:id="@+id/vanillaIceCream1LFragment"
-        android:name="com.example.pricewisev2.VanillaIceCream1LFragment"
-        android:label="fragment_vanilla_ice_cream1_l"
-        tools:layout="@layout/fragment_vanilla_ice_cream1_l" />
-    <fragment
-        android:id="@+id/sausageRollsFragment"
-        android:name="com.example.pricewisev2.SausageRollsFragment"
-        android:label="fragment_sausage_rolls"
-        tools:layout="@layout/fragment_sausage_rolls" />
-    <fragment
-        android:id="@+id/frozenPeasFragment"
-        android:name="com.example.pricewisev2.FrozenPEasFragment"
-        android:label="fragment_frozen_p_eas"
-        tools:layout="@layout/fragment_frozen_p_eas" />
-    <fragment
-        android:id="@+id/hashbrownsFragment"
-        android:name="com.example.pricewisev2.HashbrownsFragment"
-        android:label="fragment_hashbrowns"
-        tools:layout="@layout/fragment_hashbrowns" />
-    <fragment
-        android:id="@+id/frozenFriesFragment"
-        android:name="com.example.pricewisev2.FrozenFriesFragment"
-        android:label="fragment_frozen_fries"
-        tools:layout="@layout/fragment_frozen_fries" />
-    <fragment
-        android:id="@+id/virginOliveOilFragment"
-        android:name="com.example.pricewisev2.VirginOliveOilFragment"
-        android:label="fragment_virgin_olive_oil"
-        tools:layout="@layout/fragment_virgin_olive_oil" />
-    <fragment
-        android:id="@+id/nutellaFragment"
-        android:name="com.example.pricewisev2.NutellaFragment"
-        android:label="fragment_nutella"
-        tools:layout="@layout/fragment_nutella" />
-    <fragment
-        android:id="@+id/australianHoneyFragment"
-        android:name="com.example.pricewisev2.AustralianHoneyFragment"
-        android:label="fragment_australian_honey"
-        tools:layout="@layout/fragment_australian_honey" />
-    <fragment
-        android:id="@+id/vegemiteFragment"
-        android:name="com.example.pricewisev2.VegemiteFragment"
-        android:label="fragment_vegemite"
-        tools:layout="@layout/fragment_vegemite" />
-    <fragment
-        android:id="@+id/jazminRiceFragment"
-        android:name="com.example.pricewisev2.JazminRiceFragment"
-        android:label="fragment_jazmin_rice"
-        tools:layout="@layout/fragment_jazmin_rice" />
-    <fragment
-        android:id="@+id/springWaterCanTunaFragment"
-        android:name="com.example.pricewisev2.SpringWaterCanTunaFragment"
-        android:label="fragment_spring_water_can_tuna"
-        tools:layout="@layout/fragment_spring_water_can_tuna" />
-    <fragment
-        android:id="@+id/yogurtFragment"
-        android:name="com.example.pricewisev2.YogurtFragment"
-        android:label="fragment_yogurt"
-        tools:layout="@layout/fragment_yogurt" />
-    <fragment
-        android:id="@+id/cheeseFragment"
-        android:name="com.example.pricewisev2.CheeseFragment"
-        android:label="fragment_cheese"
-        tools:layout="@layout/fragment_cheese" />
+        android:id="@+id/productFragment"
+        android:name="com.example.pricewisev2.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product">
+        <argument
+            android:name="productId"
+            app:argType="string"
+            android:defaultValue="null"/>
+    </fragment>
 </navigation>

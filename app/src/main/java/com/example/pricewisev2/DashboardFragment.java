@@ -159,7 +159,7 @@ public class DashboardFragment extends Fragment {
         categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.dalle2,"Drinks",R.id.drinksFragment));
         categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.bread,"Bread and Bakery",R.id.bakeryAndBreadFragment));
         categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.frozen,"Frozen Food",R.id.frozenFoodFragment));
-        categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.pantry,"Pantry",R.id.action_dashboardFragment_to_dairyAndEggFragment));
+        categoriesRVModelArrayList.add(new CategoriesRVModel(R.drawable.pantry,"Pantry",R.id.action_dashboardFragment_to_pantryFragment));
     }
 
     @Override

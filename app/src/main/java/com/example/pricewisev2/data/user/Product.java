@@ -6,15 +6,25 @@ public class Product {
     private double colesPrice;
     private double wollisPrice;
     private double aldiPrice;
+    private String productImage;
 
     public Product(){}
 
-    public Product(String productName, String productDescription, double colesPrice, double wollisPrice, double aldiPrice) {
+    public Product(String productName, String productDescription, double colesPrice, double wollisPrice, double aldiPrice,String productImage) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.colesPrice = colesPrice;
         this.wollisPrice = wollisPrice;
         this.aldiPrice = aldiPrice;
+        this.productImage = productImage;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public String getProductName() {
